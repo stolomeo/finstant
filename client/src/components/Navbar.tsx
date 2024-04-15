@@ -8,7 +8,7 @@ export const Navbar = () => {
           <Link to="/">finstant</Link>
         </div>
         <div className="items-center hidden space-x-6 lg:flex">
-          <Link to="login" className="hover:text-primary">
+          <Link to="login" className="hover:text-primary ">
             Login
           </Link>
           <Link
