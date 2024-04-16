@@ -1,6 +1,6 @@
 export const Hero = () => {
   return (
-    <section id="hero" className="bg-gray-100 dark:bg-gray-950">
+    <section className="bg-gray-100 dark:bg-gray-950">
       <div className="container flex flex-col-reverse p-8 mx-auto lg:flex-row">
         <div className="flex flex-col space-y-10 xl:m-20 lg:mt:16 lg:w-1/2 xl:mb-52">
           <h1 className="text-4xl font-bold text-center lg:text-6xl lg:text-left">
