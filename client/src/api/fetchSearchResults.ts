@@ -1,11 +1,13 @@
-import axios from "axios";
+import { fmpApi } from "./axiosInstances";
 
-export const fetchSearchResults = async (query: string, apiKey: string) => {
-  const url = `https://financialmodelingprep.com/api/v3/search?query=${encodeURIComponent(
-    query
-  )}&limit=10&apikey=${apiKey}`;
+export const fetchSearchResults = async (query: string) => {
   try {
-    const response = await axios.get(url);
+    const params = {
+      query: encodeURIComponent(query),
+      limit: 10,
+    };
+
+    const response = await fmpApi.get("/search", { params });
     return response.data;
   } catch (error) {
     console.error("Failed to fetch search results:", error);

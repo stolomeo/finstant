@@ -14,10 +14,7 @@ export const SearchPage = () => {
   const onSearchSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     try {
-      const data = await fetchSearchResults(
-        search,
-        import.meta.env.VITE_FINANCIAL_MODELING_PREP_API_KEY
-      );
+      const data = await fetchSearchResults(search);
       setSearchResults(data);
     } catch {
       alert("Failed to fetch search results. Please try again later.");
