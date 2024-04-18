@@ -1,5 +1,6 @@
 using api.Data;
 using api.Models;
+using api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.SqlClient;
@@ -55,6 +56,9 @@ builder.Services.AddAuthentication(options =>
         )
     };
 });
+
+builder.Services.AddScoped<AuthService>();
+
 
 
 

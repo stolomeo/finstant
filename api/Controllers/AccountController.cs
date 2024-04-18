@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.Dtos.Account;
 using api.Models;
+using api.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,9 +15,11 @@ namespace api.Controllers
     public class AccountController : ControllerBase
     {
         private readonly UserManager<AppUser> _userManager;
-        public AccountController(UserManager<AppUser> userManager)
+        private readonly AuthService _authService;
+        public AccountController(UserManager<AppUser> userManager, AuthService authService)
         {
             _userManager = userManager;
+            _authService = authService;
         }
 
         [HttpPost("register")]
@@ -38,7 +41,7 @@ namespace api.Controllers
                 return BadRequest(roleResult.Errors);
 
 
-            return Ok(new { Message = "User created", UserId = appUser.Id });
+            return Ok(new { Message = "User created", UserId = appUser.Id, Token = _authService.CreateToken(appUser) });
         }
 
 
