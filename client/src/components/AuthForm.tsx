@@ -1,8 +1,46 @@
+import { useForm } from "react-hook-form";
+import {
+  loginUser as apiLoginUser,
+  registerUser as apiRegisterUser,
+} from "../api";
+import { useAuth } from "../context";
+import { User, UserAuthResponse } from "../types";
+
 type Props = {
   isNewUser?: boolean;
 };
 
 export const AuthForm = ({ isNewUser }: Props) => {
+  const { handleAuth } = useAuth();
+  const { register, handleSubmit } = useForm<User>();
+
+  const registerUser = async ({ email, username, password }: User) => {
+    try {
+      const response: UserAuthResponse = await apiRegisterUser({
+        email,
+        username,
+        password,
+      });
+      handleAuth({ email, username }, response.token);
+    } catch (error) {
+      console.error("Registration failed:", error);
+      throw error;
+    }
+  };
+
+  const loginUser = async ({ username, password }: User) => {
+    try {
+      const response: UserAuthResponse = await apiLoginUser({
+        username,
+        password,
+      });
+      handleAuth({ email: response.email, username }, response.token);
+    } catch (error) {
+      console.error("Login failed:", error);
+      throw error;
+    }
+  };
+
   return (
     <section className="bg-gray-50 dark:bg-gray-950">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -13,7 +51,10 @@ export const AuthForm = ({ isNewUser }: Props) => {
                 ? "Sign up for a new account"
                 : "Sign in to your account"}
             </h1>
-            <form className="space-y-4 md:space-y-6">
+            <form
+              onSubmit={handleSubmit(isNewUser ? registerUser : loginUser)}
+              className="space-y-4 md:space-y-6"
+            >
               {isNewUser && (
                 <div>
                   <label
@@ -27,6 +68,7 @@ export const AuthForm = ({ isNewUser }: Props) => {
                     id="email"
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Email"
+                    {...register("email")}
                   />
                 </div>
               )}
@@ -43,6 +85,7 @@ export const AuthForm = ({ isNewUser }: Props) => {
                   id="username"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="Username"
+                  {...register("username")}
                 />
               </div>
               <div>
@@ -57,6 +100,7 @@ export const AuthForm = ({ isNewUser }: Props) => {
                   id="password"
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  {...register("password")}
                 />
               </div>
               {!isNewUser && (

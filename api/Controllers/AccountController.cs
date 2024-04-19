@@ -35,9 +35,10 @@ namespace api.Controllers
             if (!result.Succeeded)
                 return Unauthorized("Invalid username or password.");
 
-            return Ok(new LoginResponseDto
+            return Ok(new AuthResponseDto
             {
                 Message = "Successful login",
+                Email = user.Email,
                 Username = user.UserName,
                 Token = _authService.CreateToken(user)
             });
@@ -60,10 +61,11 @@ namespace api.Controllers
             if (!roleResult.Succeeded)
                 return BadRequest(roleResult.Errors);
 
-            return Ok(new RegisterResponseDto
+            return Ok(new AuthResponseDto
             {
                 Message = "User created",
-                UserId = appUser.Id,
+                Username = appUser.UserName,
+                Email = appUser.Email,
                 Token = _authService.CreateToken(appUser)
             });
         }

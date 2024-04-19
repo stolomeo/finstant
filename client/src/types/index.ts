@@ -5,3 +5,16 @@ export type SearchResult = {
   stockExchange: string;
   symbol: string;
 };
+
+export type User = {
+  username: string;
+  email?: string;
+  password?: string;
+};
+
+export type UserAuthResponse = {
+  email: string;
+  username: string;
+  token: string;
+  message: string;
+};

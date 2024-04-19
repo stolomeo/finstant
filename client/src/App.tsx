@@ -1,11 +1,14 @@
 import { Outlet } from "react-router-dom";
 import { Navbar } from "./components";
+import { UserProvider } from "./context";
 
 function App() {
   return (
     <>
-      <Navbar />
-      <Outlet />
+      <UserProvider>
+        <Navbar />
+        <Outlet />
+      </UserProvider>
     </>
   );
 }
