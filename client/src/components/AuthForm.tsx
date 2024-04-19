@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const AuthForm = ({ isNewUser }: Props) => {
-  const { handleAuth } = useAuth();
+  const { login } = useAuth();
   const { register, handleSubmit } = useForm<User>();
 
   const registerUser = async ({ email, username, password }: User) => {
@@ -21,7 +21,7 @@ export const AuthForm = ({ isNewUser }: Props) => {
         username,
         password,
       });
-      handleAuth({ email, username }, response.token);
+      login({ email, username }, response.token);
     } catch (error) {
       console.error("Registration failed:", error);
       throw error;
@@ -34,7 +34,7 @@ export const AuthForm = ({ isNewUser }: Props) => {
         username,
         password,
       });
-      handleAuth({ email: response.email, username }, response.token);
+      login({ email: response.email, username }, response.token);
     } catch (error) {
       console.error("Login failed:", error);
       throw error;

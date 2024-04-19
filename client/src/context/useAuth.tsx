@@ -13,13 +13,17 @@ import { User } from "../types";
 type UserContextType = {
   user: User | null;
   token: string | null;
-  handleAuth: (user: User, token: string) => void;
+  isLoggedIn: boolean;
+  login: (user: User, token: string) => void;
+  logout: () => void;
 };
 
 const UserContext = createContext<UserContextType>({
   user: null,
   token: null,
-  handleAuth: () => {},
+  isLoggedIn: false,
+  login: () => {},
+  logout: () => {},
 });
 
 export const useAuth = () => useContext(UserContext);
@@ -32,6 +36,7 @@ export const UserProvider = ({ children }: Props) => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const isLoggedIn = useMemo(() => !!user && !!token, [user, token]);
 
   useEffect(() => {
     // Recover auth state from localStorage
@@ -43,7 +48,7 @@ export const UserProvider = ({ children }: Props) => {
     }
   }, []);
 
-  const handleAuth = useCallback(
+  const login = useCallback(
     (user: User, token: string) => {
       setUser(user);
       setToken(token);
@@ -54,13 +59,22 @@ export const UserProvider = ({ children }: Props) => {
     [navigate]
   );
 
+  const logout = useCallback(() => {
+    setUser(null);
+    setToken(null);
+    localStorage.clear();
+    navigate("/");
+  }, [navigate]);
+
   const contextValue = useMemo(
     () => ({
       user,
       token,
-      handleAuth,
+      isLoggedIn,
+      login,
+      logout,
     }),
-    [user, token, handleAuth]
+    [user, token, isLoggedIn, login, logout]
   );
 
   return (
