@@ -18,5 +18,6 @@ namespace api.Models
         [Required]
         public string CompanyName { get; set; } = string.Empty;
 
+        public List<Portfolio> Portfolios { get; set; } = new List<Portfolio>();
     }
 }
