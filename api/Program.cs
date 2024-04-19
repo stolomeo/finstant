@@ -1,4 +1,5 @@
 using api.Data;
+using api.Interfaces;
 using api.Models;
 using api.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -57,7 +58,7 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 
 

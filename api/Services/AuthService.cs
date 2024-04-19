@@ -5,12 +5,13 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using api.Interfaces;
 using api.Models;
 using Microsoft.IdentityModel.Tokens;
 
 namespace api.Services
 {
-    public class AuthService
+    public class AuthService : IAuthService
     {
         private readonly IConfiguration _config;
         private readonly SymmetricSecurityKey _key;
