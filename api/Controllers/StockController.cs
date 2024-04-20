@@ -2,10 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using api.Data;
-using api.Models;
+using api.Dtos;
+using api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace api.Controllers
 {
@@ -13,24 +12,24 @@ namespace api.Controllers
     [Route("api/stock")]
     public class StockController : ControllerBase
     {
-        private readonly ApplicationDBContext _context;
+        private readonly IStockService _stockService;
 
-        public StockController(ApplicationDBContext context)
+        public StockController(IStockService stockService)
         {
-            _context = context;
+            _stockService = stockService;
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var stocks = await _context.Stocks.ToListAsync();
+            var stocks = await _stockService.GetAllStocksAsync();
             return Ok(stocks);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var stock = await _context.Stocks.FindAsync(id);
+            var stock = await _stockService.GetStockByIdAsync(id);
             if (stock == null)
                 return NotFound();
 
@@ -38,54 +37,30 @@ namespace api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Stock stock)
+        public async Task<IActionResult> Create(CreateStockRequest createStockRequest)
         {
-            await _context.Stocks.AddAsync(stock);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(Create), new { id = stock.Id }, stock);
+            var createdStock = await _stockService.CreateStockAsync(createStockRequest);
+            return CreatedAtAction(nameof(GetById), new { id = createdStock.Id }, createdStock);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, Stock stock)
+        public async Task<IActionResult> Update(int id, UpdateStockRequest updateStockRequest)
         {
-            var existingStock = await _context.Stocks.FirstOrDefaultAsync(s => s.Id == id);
-            if (existingStock == null)
-                return NotFound($"Stock with ID {id} not found.");
+            var updatedStock = await _stockService.UpdateStockAsync(id, updateStockRequest);
+            if (updatedStock == null)
+                return NotFound();
 
-            existingStock.CompanyName = stock.CompanyName;
-            existingStock.Symbol = stock.Symbol;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception)
-            {
-                return StatusCode(500, "Error updating stock. Please try again later.");
-            }
-
-            return NoContent();
+            return Ok("Stock successfully updated");
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var stock = await _context.Stocks.FindAsync(id);
-            if (stock == null)
-            {
+            var deletedStock = await _stockService.DeleteStockAsync(id);
+            if (deletedStock == null)
                 return NotFound();
-            }
 
-            _context.Stocks.Remove(stock);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            return Ok("Stock has been removed");
         }
-
-        private bool StockExists(int id)
-        {
-            return _context.Stocks.Any(s => s.Id == id);
-        }
-
     }
 }
