@@ -10,5 +10,7 @@ namespace api.Interfaces
     public interface IPortfolioService
     {
         Task<List<Stock>> GetPortfolioByUsernameAsync(string username);
+        Task<bool> AddStockToPortfolioAsync(string username, string symbol);
+
     }
 }

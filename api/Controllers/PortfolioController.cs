@@ -38,5 +38,23 @@ namespace api.Controllers
 
             return Ok(portfolioDto);
         }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> AddStockToPortfolio(string symbol)
+        {
+            if (string.IsNullOrWhiteSpace(symbol))
+                return BadRequest("Invalid stock symbol.");
+
+            var username = User.GetUsername();
+            if (string.IsNullOrEmpty(username))
+                return Unauthorized("User is not authenticated properly.");
+
+            bool result = await _portfolioService.AddStockToPortfolioAsync(username, symbol);
+            if (!result)
+                return BadRequest("Failed to add the stock to the portfolio.");
+
+            return Ok("Stock added to portfolio successfully.");
+        }
     }
 }
