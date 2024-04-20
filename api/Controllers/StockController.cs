@@ -40,6 +40,9 @@ namespace api.Controllers
         public async Task<IActionResult> Create(CreateStockRequest createStockRequest)
         {
             var createdStock = await _stockService.CreateStockAsync(createStockRequest);
+            if (createdStock == null)
+                return BadRequest("Unable to create stock, please check the details and try again.");
+
             return CreatedAtAction(nameof(GetById), new { id = createdStock.Id }, createdStock);
         }
 

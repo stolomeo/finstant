@@ -25,7 +25,8 @@ namespace api.Services
         public async Task<List<Stock>> GetPortfolioByUsernameAsync(string username)
         {
             var user = await _userManager.FindByNameAsync(username);
-            if (user == null) return null;
+            if (user == null)
+                return null;
 
             return await _context.Portfolios.Where(p => p.AppUserId == user.Id)
                 .Select(p => new Stock
@@ -35,31 +36,26 @@ namespace api.Services
                     CompanyName = p.Stock.CompanyName
                 }).ToListAsync();
         }
-        //TODO: Refactor
-        public async Task<bool> AddStockToPortfolioAsync(string username, string symbol)
+
+        public async Task<Portfolio> AddStockToPortfolioAsync(string username, Stock stockToAdd)
         {
-            var user = await _userManager.FindByNameAsync(username);
-            if (user == null) return false;
-
-            var stock = await _context.Stocks.FirstOrDefaultAsync(s => s.Symbol == symbol);
-            if (stock == null) return false;
-
-            var userPortfolio = await GetPortfolioByUsernameAsync(user.UserName);
-            if (userPortfolio.Any(e => e.Symbol.Equals(symbol, StringComparison.OrdinalIgnoreCase)))
-                return false;
+            var appUser = await _userManager.FindByNameAsync(username);
+            if (appUser == null)
+                return null;
 
             var portfolioModel = new Portfolio
             {
-                StockId = stock.Id,
-                AppUserId = user.Id
+                StockId = stockToAdd.Id,
+                AppUserId = appUser.Id
             };
 
-            if (portfolioModel == null) return false;
+            if (portfolioModel == null)
+                return null;
 
             await _context.Portfolios.AddAsync(portfolioModel);
             await _context.SaveChangesAsync();
 
-            return true;
+            return portfolioModel;
         }
     }
 }

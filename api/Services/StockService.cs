@@ -29,6 +29,11 @@ namespace api.Services
             return await _context.Stocks.FindAsync(id);
         }
 
+        public async Task<Stock> GetStockBySymbolAsync(string symbol)
+        {
+            return await _context.Stocks.FirstOrDefaultAsync(s => s.Symbol == symbol);
+        }
+
         public async Task<Stock> CreateStockAsync(CreateStockRequest createStockRequest)
         {
             var stock = new Stock
@@ -44,7 +49,7 @@ namespace api.Services
 
         public async Task<Stock> UpdateStockAsync(int id, UpdateStockRequest updateStockRequest)
         {
-            var stockToUpdate = await _context.Stocks.FirstOrDefaultAsync(s => s.Id == id);
+            var stockToUpdate = await GetStockByIdAsync(id);
             if (stockToUpdate == null)
                 return null;
 

@@ -16,14 +16,7 @@ namespace api.Dtos
         [MaxLength(50)]
         public string CompanyName { get; init; }
     }
-    public record UpdateStockRequest
+    public record UpdateStockRequest : CreateStockRequest
     {
-        [Required]
-        [MaxLength(10)]
-        public string Symbol { get; init; }
-
-        [Required]
-        [MaxLength(50)]
-        public string CompanyName { get; init; }
     }
 }

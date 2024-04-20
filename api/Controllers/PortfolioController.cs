@@ -18,10 +18,12 @@ namespace api.Controllers
     public class PortfolioController : ControllerBase
     {
         private readonly IPortfolioService _portfolioService;
+        private readonly IStockService _stockService;
 
-        public PortfolioController(IPortfolioService portfolioService)
+        public PortfolioController(IPortfolioService portfolioService, IStockService stockService)
         {
             _portfolioService = portfolioService;
+            _stockService = stockService;
         }
 
         [HttpGet]
@@ -43,18 +45,24 @@ namespace api.Controllers
         [Authorize]
         public async Task<IActionResult> AddStockToPortfolio(string symbol)
         {
-            if (string.IsNullOrWhiteSpace(symbol))
-                return BadRequest("Invalid stock symbol.");
-
             var username = User.GetUsername();
             if (string.IsNullOrEmpty(username))
                 return Unauthorized("User is not authenticated properly.");
 
-            bool result = await _portfolioService.AddStockToPortfolioAsync(username, symbol);
-            if (!result)
-                return BadRequest("Failed to add the stock to the portfolio.");
+            var stockToAdd = await _stockService.GetStockBySymbolAsync(symbol);
+            if (stockToAdd == null)
+                return NotFound("Stock does not exist in the database.");
 
-            return Ok("Stock added to portfolio successfully.");
+            var userPortfolio = await _portfolioService.GetPortfolioByUsernameAsync(username);
+            if (userPortfolio.Any(e => e.Symbol.Equals(symbol, StringComparison.OrdinalIgnoreCase)))
+                return BadRequest("Cannot add the same stock to portfolio multiple times.");
+
+            var result = await _portfolioService.AddStockToPortfolioAsync(username, stockToAdd);
+            if (result == null)
+                return StatusCode(500, "Could not create portfolio entry.");
+
+            return Created();
+
         }
     }
 }
