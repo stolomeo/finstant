@@ -57,5 +57,20 @@ namespace api.Services
 
             return portfolioModel;
         }
+
+        public async Task<Portfolio> RemoveStockFromPortfolioAsync(string username, Stock stockToRemove)
+        {
+            var portfolioEntry = await _context.Portfolios
+                .Where(p => p.AppUser.UserName == username && p.StockId == stockToRemove.Id)
+                .FirstOrDefaultAsync();
+
+            if (portfolioEntry == null)
+                return null;
+
+            _context.Portfolios.Remove(portfolioEntry);
+            await _context.SaveChangesAsync();
+
+            return portfolioEntry;
+        }
     }
 }
