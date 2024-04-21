@@ -1,6 +1,5 @@
 import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
-import { fetchSearchResults } from "../api";
-import { fetchUserPortfolio } from "../api/fetchUserPortfolio";
+import { fetchSearchResults, fetchUserPortfolio } from "../api";
 import { Portfolio, Searchbar, SearchResults } from "../components";
 import { SearchResult, Stock } from "../types";
 

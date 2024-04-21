@@ -1,4 +1,4 @@
-import { deleteStockFromPortfolio } from "../api/deleteStockFromPortfolio";
+import { deleteStockFromPortfolio } from "../api";
 import { Stock } from "../types";
 
 type PortfolioItemProps = {

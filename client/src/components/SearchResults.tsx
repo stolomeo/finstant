@@ -1,4 +1,4 @@
-import { addStockToPortfolio } from "../api/addStockToPortfolio";
+import { addStockToPortfolio } from "../api";
 import type { SearchResult } from "../types";
 
 interface SearchResultProps extends SearchResult {
