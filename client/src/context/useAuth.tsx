@@ -8,6 +8,7 @@ import {
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
+import { finstantApi } from "../api/axiosInstances";
 import { User } from "../types";
 
 type UserContextType = {
@@ -45,6 +46,8 @@ export const UserProvider = ({ children }: Props) => {
     if (storedUser && storedToken) {
       setUser(JSON.parse(storedUser));
       setToken(storedToken);
+      finstantApi.defaults.headers.common["Authorization"] =
+        "Bearer " + storedToken;
     }
   }, []);
 
@@ -54,6 +57,7 @@ export const UserProvider = ({ children }: Props) => {
       setToken(token);
       localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("token", token);
+      finstantApi.defaults.headers.common["Authorization"] = "Bearer " + token;
       navigate("/");
     },
     [navigate]
@@ -63,6 +67,7 @@ export const UserProvider = ({ children }: Props) => {
     setUser(null);
     setToken(null);
     localStorage.clear();
+    delete finstantApi.defaults.headers.common["Authorization"];
     navigate("/");
   }, [navigate]);
 

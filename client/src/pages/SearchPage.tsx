@@ -1,11 +1,13 @@
-import { ChangeEvent, SyntheticEvent, useState } from "react";
+import { ChangeEvent, SyntheticEvent, useEffect, useState } from "react";
 import { fetchSearchResults } from "../api";
+import { fetchUserPortfolio } from "../api/fetchUserPortfolio";
 import { Portfolio, Searchbar, SearchResults } from "../components";
-import { SearchResult } from "../types";
+import { SearchResult, Stock } from "../types";
 
 export const SearchPage = () => {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
+  const [portfolioItems, setPortfolioItems] = useState<Stock[]>([]);
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -21,6 +23,19 @@ export const SearchPage = () => {
     }
   };
 
+  const refreshPortfolio = async () => {
+    try {
+      const userPortfolio = await fetchUserPortfolio();
+      setPortfolioItems(userPortfolio);
+    } catch (error) {
+      console.error("Failed to fetch updated portfolio:", error);
+    }
+  };
+
+  useEffect(() => {
+    refreshPortfolio();
+  }, []);
+
   return (
     <>
       <Searchbar
@@ -28,8 +43,11 @@ export const SearchPage = () => {
         handleSearch={handleSearch}
         onSearchSubmit={onSearchSubmit}
       />
-      <Portfolio />
-      <SearchResults searchResults={searchResults} />
+      <Portfolio portfolioItems={portfolioItems} />
+      <SearchResults
+        searchResults={searchResults}
+        refreshPortfolio={refreshPortfolio}
+      />
     </>
   );
 };

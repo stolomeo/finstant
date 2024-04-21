@@ -1,8 +1,5 @@
 import { useForm } from "react-hook-form";
-import {
-  loginUser as apiLoginUser,
-  registerUser as apiRegisterUser,
-} from "../api";
+import { loginUser, registerUser } from "../api";
 import { useAuth } from "../context";
 import { User, UserAuthResponse } from "../types";
 
@@ -14,9 +11,9 @@ export const AuthForm = ({ isNewUser }: Props) => {
   const { login } = useAuth();
   const { register, handleSubmit } = useForm<User>();
 
-  const registerUser = async ({ email, username, password }: User) => {
+  const handleRegisterUser = async ({ email, username, password }: User) => {
     try {
-      const response: UserAuthResponse = await apiRegisterUser({
+      const response: UserAuthResponse = await registerUser({
         email,
         username,
         password,
@@ -28,9 +25,9 @@ export const AuthForm = ({ isNewUser }: Props) => {
     }
   };
 
-  const loginUser = async ({ username, password }: User) => {
+  const handleLoginUser = async ({ username, password }: User) => {
     try {
-      const response: UserAuthResponse = await apiLoginUser({
+      const response: UserAuthResponse = await loginUser({
         username,
         password,
       });
@@ -52,7 +49,9 @@ export const AuthForm = ({ isNewUser }: Props) => {
                 : "Sign in to your account"}
             </h1>
             <form
-              onSubmit={handleSubmit(isNewUser ? registerUser : loginUser)}
+              onSubmit={handleSubmit(
+                isNewUser ? handleRegisterUser : handleLoginUser
+              )}
               className="space-y-4 md:space-y-6"
             >
               {isNewUser && (

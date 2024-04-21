@@ -18,3 +18,9 @@ export type UserAuthResponse = {
   token: string;
   message: string;
 };
+
+export type Stock = {
+  id: number;
+  symbol: string;
+  companyName: string;
+};

@@ -62,7 +62,6 @@ namespace api.Controllers
                 return StatusCode(500, "Could not create portfolio entry.");
 
             return Created();
-
         }
     }
 }
