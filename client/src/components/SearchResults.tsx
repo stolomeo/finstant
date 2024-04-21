@@ -1,4 +1,4 @@
-import { addStockToPortfolio as apiAddStockToPortfolio } from "../api/addStockToPortfolio";
+import { addStockToPortfolio } from "../api/addStockToPortfolio";
 import type { SearchResult } from "../types";
 
 interface SearchResultProps extends SearchResult {
@@ -13,13 +13,12 @@ const SearchResult = ({
   symbol,
   refreshPortfolio,
 }: SearchResultProps) => {
-  const addStockToPortfolio = async () => {
+  const handleAddStock = async () => {
     try {
-      await apiAddStockToPortfolio(symbol);
+      await addStockToPortfolio(symbol);
       await refreshPortfolio();
     } catch (error) {
       console.error("Failed to add stock to portfolio:", error);
-      throw error;
     }
   };
   return (
@@ -33,7 +32,7 @@ const SearchResult = ({
       </p>
       <div className="flex flex-col items-center justify-end flex-1 md:flex-row md:space-y-0">
         <button
-          onClick={addStockToPortfolio}
+          onClick={handleAddStock}
           type="button"
           className="p-2 px-8 text-white rounded-lg bg-primary hover:opacity-70 focus:outline-none"
           aria-label={`Add ${name} to portfolio`}

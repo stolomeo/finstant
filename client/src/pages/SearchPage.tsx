@@ -43,7 +43,10 @@ export const SearchPage = () => {
         handleSearch={handleSearch}
         onSearchSubmit={onSearchSubmit}
       />
-      <Portfolio portfolioItems={portfolioItems} />
+      <Portfolio
+        portfolioItems={portfolioItems}
+        refreshPortfolio={refreshPortfolio}
+      />
       <SearchResults
         searchResults={searchResults}
         refreshPortfolio={refreshPortfolio}
