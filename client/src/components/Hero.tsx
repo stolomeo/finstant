@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export const Hero = () => {
   return (
     <section className="bg-gray-100 dark:bg-gray-950">
@@ -11,9 +13,12 @@ export const Hero = () => {
             fake news
           </p>
           <div className="mx-auto lg:mx-0">
-            <button className="px-10 py-5 text-2xl font-bold text-white rounded bg-primary lg:py-4 hover:opacity-70">
+            <Link
+              to="search"
+              className="px-10 py-5 text-2xl font-bold text-white rounded bg-primary lg:py-4 hover:opacity-70"
+            >
               Get Started
-            </button>
+            </Link>
           </div>
         </div>
         <div className="mx-auto mb-24 md:px-10 lg:mb-0 lg:w-1/2">

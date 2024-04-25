@@ -15,13 +15,13 @@ const PortfolioItem = ({ symbol, refreshPortfolio }: PortfolioItemProps) => {
     }
   };
   return (
-    <div className="flex flex-col p-8 mx-auto space-y-4 text-center rounded-lg shadow-lg shadow-gray-300">
-      <div className="pt-6 text-xl font-bold">{symbol}</div>
+    <div className="flex flex-col items-center w-1/4 p-6 bg-white border border-gray-200 rounded-lg shadow lg:w-1/5 xl:w-1/6 dark:bg-gray-800 dark:border-gray-700">
+      <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+        {symbol}
+      </h5>
       <button
         onClick={handleRemoveStock}
-        type="button"
-        className="py-3 text-white bg-red-500 border-2 rounded-lg hover:text-red-500 hover:bg-white"
-        aria-label={`Remove ${symbol} from portfolio`}
+        className="justify-center w-11/12 px-3 py-2 text-lg text-white bg-red-500 rounded-lg md:w-1/2 xl:w-1/3 hover:bg-red-600 focus:ring-4 focus:outline-none"
       >
         X
       </button>
@@ -39,11 +39,11 @@ export const Portfolio = ({
   refreshPortfolio,
 }: PortfolioProps) => {
   return (
-    <section>
+    <section className="mb-8">
       <h2 className="mt-3 mb-3 text-3xl font-semibold text-center md:text-4xl">
         My Portfolio
       </h2>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap justify-center gap-3">
         {portfolioItems?.length > 0 ? (
           portfolioItems.map((item) => (
             <PortfolioItem
@@ -53,7 +53,7 @@ export const Portfolio = ({
             />
           ))
         ) : (
-          <h3 className="mt-3 mb-3 text-xl font-semibold text-center md:text-xl">
+          <h3 className="mx-auto mt-3 mb-3 text-xl font-semibold text-center md:text-xl">
             Your portfolio is empty.
           </h3>
         )}

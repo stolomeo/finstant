@@ -22,7 +22,7 @@ const SearchResult = ({
     }
   };
   return (
-    <div className="flex flex-col items-center justify-between w-full p-6 rounded-lg md:gap-4 md:flex-row">
+    <div className="flex flex-col items-center w-3/4 gap-3 p-6 mx-auto mb-4 rounded-lg shadow-lg dark:shadow-md md:gap-4 md:flex-row dark:bg-gray-900 dark:shadow-gray-700">
       <div className="font-bold text-center md:text-left">
         {name} ({symbol})
       </div>
@@ -30,7 +30,7 @@ const SearchResult = ({
       <p className="font-bold">
         {exchangeShortName} - {stockExchange}
       </p>
-      <div className="flex flex-col items-center justify-end flex-1 md:flex-row md:space-y-0">
+      <div className="flex flex-col items-center justify-end flex-1 md:flex-row">
         <button
           onClick={handleAddStock}
           type="button"
@@ -54,7 +54,7 @@ export const SearchResults = ({
   refreshPortfolio,
 }: SearchResultsProps) => {
   return (
-    <>
+    <section>
       {searchResults.length > 0 ? (
         searchResults.map((result) => (
           <SearchResult
@@ -68,6 +68,6 @@ export const SearchResults = ({
           No results found!
         </p>
       )}
-    </>
+    </section>
   );
 };
