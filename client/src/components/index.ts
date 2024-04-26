@@ -6,4 +6,5 @@ export * from "./Navbar";
 export * from "./Portfolio";
 export * from "./Searchbar";
 export * from "./SearchResults";
+export * from "./SecFiling";
 export * from "./Sidebar";

@@ -62,3 +62,15 @@ export type CompanyProfile = {
   isAdr: boolean;
   isFund: boolean;
 };
+
+export type CompanySecFilings = {
+  symbol: string;
+  fillingDate: string;
+  acceptedDate: string;
+  cik: string;
+  type: string;
+  link: string;
+  finalLink: string;
+};
+
+export type CompanyData = [CompanyProfile, CompanySecFilings[]];

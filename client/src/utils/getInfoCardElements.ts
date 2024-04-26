@@ -1,22 +1,22 @@
 import { CompanyProfile } from "../types";
 
-export const getInfoCardElements = (companyData: CompanyProfile) => {
+export const getInfoCardElements = (companyProfile: CompanyProfile) => {
   return [
     {
       title: "Company Name",
-      subTitle: companyData.companyName,
+      subTitle: companyProfile.companyName,
     },
     {
       title: "Price",
-      subTitle: companyData.price,
+      subTitle: companyProfile.price,
     },
     {
       title: "DCF",
-      subTitle: parseFloat(companyData.dcf.toFixed(4)),
+      subTitle: parseFloat(companyProfile.dcf.toFixed(4)),
     },
     {
       title: "Sector",
-      subTitle: companyData.sector,
+      subTitle: companyProfile.sector,
     },
   ];
 };

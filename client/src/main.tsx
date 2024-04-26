@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { fetchCompanyProfile } from "./api";
+import { fetchCompanyProfile, fetchSecFilings } from "./api";
 import App from "./App";
 import { CompanyProfile } from "./components";
 import "./index.css";
@@ -30,7 +30,10 @@ const router = createBrowserRouter([
             path: "company-profile",
             element: <CompanyProfile />,
             loader: async ({ params }) => {
-              return await fetchCompanyProfile(params.ticker as string);
+              return [
+                await fetchCompanyProfile(params.ticker as string),
+                await fetchSecFilings(params.ticker as string),
+              ];
             },
           },
           // { path: "income-statement", element: <IncomeStatement /> },
