@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using api.Dtos;
 using api.Interfaces;
 using api.Models;
@@ -31,8 +27,8 @@ namespace api.Controllers
             if (user == null)
                 return Unauthorized("Invalid username or password.");
 
-            var result = await _signInManager.CheckPasswordSignInAsync(user, loginRequest.Password, false);
-            if (!result.Succeeded)
+            var passwordSignInResult = await _signInManager.CheckPasswordSignInAsync(user, loginRequest.Password, false);
+            if (!passwordSignInResult.Succeeded)
                 return Unauthorized("Invalid username or password.");
 
             return Ok(new AuthResponse
