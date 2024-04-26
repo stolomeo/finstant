@@ -1,5 +1,7 @@
 export * from "./AuthForm";
+export * from "./CompanyProfile";
 export * from "./Hero";
+export * from "./InfoCard";
 export * from "./Navbar";
 export * from "./Portfolio";
 export * from "./Searchbar";

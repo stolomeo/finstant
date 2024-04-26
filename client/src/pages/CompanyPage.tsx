@@ -1,5 +1,11 @@
+import { Outlet } from "react-router-dom";
 import { Sidebar } from "../components";
 
 export const CompanyPage = () => {
-  return <Sidebar />;
+  return (
+    <div className="flex w-full">
+      <Sidebar />
+      <Outlet />
+    </div>
+  );
 };

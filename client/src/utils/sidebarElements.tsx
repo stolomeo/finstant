@@ -5,26 +5,31 @@ import { SlGraph } from "react-icons/sl";
 export const sidebarElements = [
   {
     icon: <FaHome />,
-    label: "Home",
+    label: "Company Profile",
+    route: "company-profile",
   },
 
   {
     icon: <FaTable />,
     label: "Income Statement",
+    route: "income-statement",
   },
 
   {
     icon: <FaTableCells />,
     label: "Balance Sheet",
+    route: "balance-sheet",
   },
 
   {
     icon: <FaMoneyBill />,
     label: "Cashflow Statement",
+    route: "cashflow-statement",
   },
 
   {
     icon: <SlGraph />,
     label: "Historical Dividend",
+    route: "historical-dividend",
   },
 ];
