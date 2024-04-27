@@ -26,41 +26,12 @@ export type Stock = {
 };
 
 export type CompanyProfile = {
-  symbol: string;
-  price: number;
-  beta: number;
-  volAvg: number;
-  mktCap: number;
-  lastDiv: number;
-  range: string;
-  changes: number;
   companyName: string;
-  currency: string;
-  cik: string;
-  isin: string;
-  exchange: string;
-  exchangeShortName: string;
-  industry: string;
-  website: string;
-  description: string;
-  ceo: string;
-  sector: string;
-  counter: string;
-  fullTimeEmployees: string;
-  phone: string;
-  address: string;
-  city: string;
-  state: string;
-  zip: string;
-  dcfDiff: number;
+  price: number;
+  symbol: string;
   dcf: number;
-  image: string;
-  ipoDate: string;
-  defaultImage: boolean;
-  isEtf: boolean;
-  isActivelyTrading: boolean;
-  isAdr: boolean;
-  isFund: boolean;
+  sector: string;
+  description: string;
 };
 
 export type CompanySecFilings = {
@@ -74,66 +45,16 @@ export type CompanySecFilings = {
 };
 
 export type CompanyKeyMetrics = {
-  revenuePerShareTTM: number;
-  netIncomePerShareTTM: number;
-  operatingCashFlowPerShareTTM: number;
-  freeCashFlowPerShareTTM: number;
-  cashPerShareTTM: number;
-  bookValuePerShareTTM: number;
-  tangibleBookValuePerShareTTM: number;
-  shareholdersEquityPerShareTTM: number;
-  interestDebtPerShareTTM: number;
   marketCapTTM: number;
-  enterpriseValueTTM: number;
-  peRatioTTM: number;
-  priceToSalesRatioTTM: number;
-  pocfratioTTM: number;
-  pfcfRatioTTM: number;
-  pbRatioTTM: number;
-  ptbRatioTTM: number;
-  evToSalesTTM: number;
-  enterpriseValueOverEBITDATTM: number;
-  evToOperatingCashFlowTTM: number;
-  evToFreeCashFlowTTM: number;
-  earningsYieldTTM: number;
-  freeCashFlowYieldTTM: number;
-  debtToEquityTTM: number;
-  debtToAssetsTTM: number;
-  netDebtToEBITDATTM: number;
   currentRatioTTM: number;
-  interestCoverageTTM: number;
-  incomeQualityTTM: number;
-  dividendYieldTTM: number;
-  dividendYieldPercentageTTM: number;
-  payoutRatioTTM: number;
-  salesGeneralAndAdministrativeToRevenueTTM: number;
-  researchAndDevelopementToRevenueTTM: number;
-  intangiblesToTotalAssetsTTM: number;
-  capexToOperatingCashFlowTTM: number;
-  capexToRevenueTTM: number;
-  capexToDepreciationTTM: number;
-  stockBasedCompensationToRevenueTTM: number;
-  grahamNumberTTM: number;
-  roicTTM: number;
-  returnOnTangibleAssetsTTM: number;
-  grahamNetNetTTM: number;
-  workingCapitalTTM: number;
-  tangibleAssetValueTTM: number;
-  netCurrentAssetValueTTM: number;
-  investedCapitalTTM: number;
-  averageReceivablesTTM: number;
-  averagePayablesTTM: number;
-  averageInventoryTTM: number;
-  daysSalesOutstandingTTM: number;
-  daysPayablesOutstandingTTM: number;
-  daysOfInventoryOnHandTTM: number;
-  receivablesTurnoverTTM: number;
-  payablesTurnoverTTM: number;
-  inventoryTurnoverTTM: number;
   roeTTM: number;
+  returnOnTangibleAssetsTTM: number;
+  freeCashFlowPerShareTTM: number;
+  bookValuePerShareTTM: number;
+  dividendYieldTTM: number;
   capexPerShareTTM: number;
-  dividendPerShareTTM: number;
-  debtToMarketCapTTM: number;
+  grahamNumberTTM: number;
+  peRatioTTM: number;
 };
 
 export type CompanyProfileData = [
@@ -158,11 +79,6 @@ export type CompanyIncomeStatement = {
   incomeBeforeTaxRatio: number;
 };
 
-export type Column = {
-  header: string;
-  accessor: keyof CompanyIncomeStatement;
-};
-
 export type CompanyBalanceSheet = {
   totalAssets: number;
   totalCurrentAssets: number;
@@ -175,4 +91,20 @@ export type CompanyBalanceSheet = {
   totalCurrentLiabilities: number;
   totalStockholdersEquity: number;
   retainedEarnings: number;
+};
+
+export type CompanyCashFlow = {
+  date: string;
+  operatingCashFlow: number;
+  netCashUsedForInvestingActivites: number;
+  netCashUsedProvidedByFinancingActivities: number;
+  cashAtEndOfPeriod: number;
+  capitalExpenditure: number;
+  commonStockIssued: number;
+  freeCashFlow: number;
+};
+
+export type Column = {
+  header: string;
+  accessor: keyof CompanyIncomeStatement | keyof CompanyCashFlow;
 };

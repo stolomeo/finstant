@@ -3,13 +3,18 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
   fetchBalanceSheet,
+  fetchCashflowStatements,
   fetchCompanyProfile,
   fetchIncomeStatements,
   fetchKeyMetrics,
   fetchSecFilings,
 } from "./api";
 import App from "./App";
-import { CompanyProfile, IncomeStatement } from "./components";
+import {
+  CashflowStatement,
+  CompanyProfile,
+  IncomeStatement,
+} from "./components";
 import { BalanceSheet } from "./components/BalanceSheet";
 import "./index.css";
 import {
@@ -58,7 +63,13 @@ const router = createBrowserRouter([
               return await fetchBalanceSheet(params.ticker as string);
             },
           },
-          // { path: "cashflow-statement", element: <CashflowStatement /> },
+          {
+            path: "cashflow-statement",
+            element: <CashflowStatement />,
+            loader: async ({ params }) => {
+              return await fetchCashflowStatements(params.ticker as string);
+            },
+          },
           // { path: "historical-dividend", element: <HistoricalDividend /> },
         ],
       },

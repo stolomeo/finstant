@@ -1,6 +1,7 @@
 export * from "./addStockToPortfolio";
 export * from "./deleteStockFromPortfolio";
 export * from "./fetchBalanceSheet";
+export * from "./fetchCashflowStatements";
 export * from "./fetchCompanyProfile";
 export * from "./fetchIncomeStatement";
 export * from "./fetchKeyMetrics";

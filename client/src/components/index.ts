@@ -1,4 +1,5 @@
 export * from "./AuthForm";
+export * from "./CashflowStatement";
 export * from "./CompanyProfile";
 export * from "./Hero";
 export * from "./IncomeStatement";

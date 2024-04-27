@@ -1,8 +1,9 @@
-import { Column, CompanyIncomeStatement } from "../types";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Column } from "../types";
 
 type Props = {
   columns: Column[];
-  rows: CompanyIncomeStatement[];
+  rows: any[];
 };
 
 export const Table = ({ columns, rows }: Props) => {
