@@ -2,7 +2,7 @@ import { useLoaderData } from "react-router-dom";
 import { CompanyProfileData } from "../types";
 import { getInfoCardElements, getKeyMetricElements } from "../utils";
 import { InfoCard } from "./InfoCard";
-import { KeyMetric } from "./KeyMetric";
+import { MetricCard } from "./MetricCard";
 import { SecFiling } from "./SecFiling";
 
 export const CompanyProfile = () => {
@@ -43,7 +43,7 @@ export const CompanyProfile = () => {
               <div className="w-full p-4 mt-4 mb-4 ml-4 rounded-lg shadow bg-gray-50 dark:bg-gray-800 sm:p-6">
                 <ul className="divide-y divide-gray-200">
                   {keyMetricElements.map((item, index) => (
-                    <KeyMetric
+                    <MetricCard
                       key={index}
                       label={item.label}
                       total={item.total}

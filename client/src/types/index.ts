@@ -162,3 +162,17 @@ export type Column = {
   header: string;
   accessor: keyof CompanyIncomeStatement;
 };
+
+export type CompanyBalanceSheet = {
+  totalAssets: number;
+  totalCurrentAssets: number;
+  cashAndCashEquivalents: number;
+  propertyPlantEquipmentNet: number;
+  intangibleAssets: number;
+  longTermDebt: number;
+  totalDebt: number;
+  totalLiabilities: number;
+  totalCurrentLiabilities: number;
+  totalStockholdersEquity: number;
+  retainedEarnings: number;
+};

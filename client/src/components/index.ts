@@ -3,7 +3,7 @@ export * from "./CompanyProfile";
 export * from "./Hero";
 export * from "./IncomeStatement";
 export * from "./InfoCard";
-export * from "./KeyMetric";
+export * from "./MetricCard";
 export * from "./Navbar";
 export * from "./Portfolio";
 export * from "./Searchbar";
