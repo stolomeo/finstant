@@ -173,6 +173,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 - [How to implement JWT authentication in ASP.NET Core](https://www.infoworld.com/article/3669188/how-to-implement-jwt-authentication-in-aspnet-core.html)
 - [Quickstart: Use Azure Data Studio to connect and query SQL Server](https://learn.microsoft.com/en-us/azure-data-studio/quickstart-sql-server)
 - [React Hook Form](https://react-hook-form.com/)
+- [React Router DOM](https://reactrouter.com/en/main)
 - [Safe storage of app secrets in development in ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-8.0&tabs=linux)
 - [Tailwind CSS Cheat Sheet](https://nerdcave.com/tailwind-cheat-sheet)
 - [Vite](https://vitejs.dev/)
