@@ -10,7 +10,7 @@ export const fetchKeyMetrics = async (
     );
     return response.data[0];
   } catch (error) {
-    console.error("Failed to fetch SEC filings:", error);
+    console.error("Failed to fetch key metrics:", error);
     throw error;
   }
 };

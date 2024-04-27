@@ -37,6 +37,11 @@ export const formatLargeMonetaryNumber = (
   const formattedNumber = formatLargeNumber(absNumber);
   return `${sign}${currencySymbol}${formattedNumber.replace(
     /[a-zA-Z]$/,
-    (m) => " " + m
+    (m) => m
   )}`;
+};
+
+export const formatTwoDecimals = (number?: number): string => {
+  if (number === undefined || number === null) return "";
+  return number.toFixed(2);
 };

@@ -136,8 +136,29 @@ export type CompanyKeyMetrics = {
   debtToMarketCapTTM: number;
 };
 
-export type CompanyData = [
+export type CompanyProfileData = [
   CompanyProfile,
   CompanySecFilings[],
   CompanyKeyMetrics
 ];
+
+export type CompanyIncomeStatement = {
+  date: string;
+  revenue: number;
+  costOfRevenue: number;
+  depreciationAndAmortization: number;
+  operatingIncome: number;
+  incomeBeforeTax: number;
+  netIncome: number;
+  netIncomeRatio: number;
+  eps: number;
+  epsdiluted: number;
+  grossProfitRatio: number;
+  operatingIncomeRatio: number;
+  incomeBeforeTaxRatio: number;
+};
+
+export type Column = {
+  header: string;
+  accessor: keyof CompanyIncomeStatement;
+};

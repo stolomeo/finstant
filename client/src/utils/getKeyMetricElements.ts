@@ -1,5 +1,5 @@
 import { CompanyKeyMetrics } from "../types";
-import { formatLargeNumber } from "./formatLargeNumber";
+import { formatLargeNumber } from "./formatting";
 
 export const getKeyMetricElements = (keyMetrics: CompanyKeyMetrics) => {
   return [
@@ -54,13 +54,13 @@ export const getKeyMetricElements = (keyMetrics: CompanyKeyMetrics) => {
       label: "Graham Number",
       total: parseFloat(keyMetrics.grahamNumberTTM.toFixed(2)),
       description:
-        "This is the upperbouind of the price range that a defensive investor should pay for a stock",
+        "This is the upperbound of the price range that a defensive investor should pay for a stock",
     },
     {
       label: "PE Ratio",
       total: parseFloat(keyMetrics.peRatioTTM.toFixed(2)),
       description:
-        "This is the upperbouind of the price range that a defensive investor should pay for a stock",
+        "The price-to-earnings (P/E) ratio measures a company's current share price relative to its per-share earnings.",
     },
   ];
 };

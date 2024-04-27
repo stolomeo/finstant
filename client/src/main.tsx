@@ -2,8 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { fetchCompanyProfile, fetchKeyMetrics, fetchSecFilings } from "./api";
+import { fetchIncomeStatements } from "./api/fetchIncomeStatement";
 import App from "./App";
-import { CompanyProfile } from "./components";
+import { CompanyProfile, IncomeStatement } from "./components";
 import "./index.css";
 import {
   CompanyPage,
@@ -37,7 +38,13 @@ const router = createBrowserRouter([
               ];
             },
           },
-          // { path: "income-statement", element: <IncomeStatement /> },
+          {
+            path: "income-statement",
+            element: <IncomeStatement />,
+            loader: async ({ params }) => {
+              return await fetchIncomeStatements(params.ticker as string);
+            },
+          },
           // { path: "balance-sheet", element: <BalanceSheet /> },
           // { path: "cashflow-statement", element: <CashflowStatement /> },
           // { path: "historical-dividend", element: <HistoricalDividend /> },

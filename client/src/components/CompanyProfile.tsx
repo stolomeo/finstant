@@ -1,12 +1,12 @@
 import { useLoaderData } from "react-router-dom";
-import { CompanyData } from "../types";
+import { CompanyProfileData } from "../types";
 import { getInfoCardElements, getKeyMetricElements } from "../utils";
 import { InfoCard } from "./InfoCard";
 import { KeyMetric } from "./KeyMetric";
 import { SecFiling } from "./SecFiling";
 
 export const CompanyProfile = () => {
-  const companyData = useLoaderData() as CompanyData;
+  const companyData = useLoaderData() as CompanyProfileData;
   const profileData = companyData[0];
   const secFilings = companyData[1].slice(0, 7);
   const keyMetrics = companyData[2];
