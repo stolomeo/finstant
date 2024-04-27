@@ -2,6 +2,7 @@ export * from "./AuthForm";
 export * from "./CashflowStatement";
 export * from "./CompanyProfile";
 export * from "./Hero";
+export * from "./HistoricalDividend";
 export * from "./IncomeStatement";
 export * from "./InfoCard";
 export * from "./MetricCard";

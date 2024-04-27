@@ -5,6 +5,7 @@ import {
   fetchBalanceSheet,
   fetchCashflowStatements,
   fetchCompanyProfile,
+  fetchHistoricalDividend,
   fetchIncomeStatements,
   fetchKeyMetrics,
   fetchSecFilings,
@@ -13,6 +14,7 @@ import App from "./App";
 import {
   CashflowStatement,
   CompanyProfile,
+  HistoricalDividend,
   IncomeStatement,
 } from "./components";
 import { BalanceSheet } from "./components/BalanceSheet";
@@ -70,7 +72,13 @@ const router = createBrowserRouter([
               return await fetchCashflowStatements(params.ticker as string);
             },
           },
-          // { path: "historical-dividend", element: <HistoricalDividend /> },
+          {
+            path: "historical-dividend",
+            element: <HistoricalDividend />,
+            loader: async ({ params }) => {
+              return await fetchHistoricalDividend(params.ticker as string);
+            },
+          },
         ],
       },
     ],

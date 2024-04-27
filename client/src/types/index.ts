@@ -108,3 +108,13 @@ export type Column = {
   header: string;
   accessor: keyof CompanyIncomeStatement | keyof CompanyCashFlow;
 };
+
+export interface CompanyHistoricalDividend {
+  date: string;
+  label: string;
+  adjDividend: number;
+  dividend: number;
+  recordDate: string;
+  paymentDate: string;
+  declarationDate: string;
+}

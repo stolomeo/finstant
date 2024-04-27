@@ -15,7 +15,7 @@ export const fetchCashflowStatements = async (
     );
     return response.data;
   } catch (error) {
-    console.error("Failed to fetch income statements:", error);
+    console.error("Failed to fetch cashflow statements:", error);
     throw error;
   }
 };
