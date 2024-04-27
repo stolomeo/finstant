@@ -1,6 +1,7 @@
 export * from "./addStockToPortfolio";
 export * from "./deleteStockFromPortfolio";
 export * from "./fetchCompanyProfile";
+export * from "./fetchKeyMetrics";
 export * from "./fetchSearchResults";
 export * from "./fetchSecFilings";
 export * from "./fetchUserPortfolio";

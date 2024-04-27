@@ -25,7 +25,7 @@ export const Sidebar = () => {
   return (
     <>
       <nav
-        className="top-0 left-0 z-40 block w-1/6 h-screen transition-transform -translate-x-full border-gray-100 shadow-xl sm:translate-x-0 dark:border dark:border-gray-600 dark:rounded-sm"
+        className="top-0 left-0 z-40 block w-1/6 transition-transform -translate-x-full border-gray-100 shadow-xl height-auto sm:translate-x-0 dark:border dark:border-gray-600 dark:rounded-sm"
         aria-label="Sidebar"
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">

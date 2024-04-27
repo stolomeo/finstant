@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { fetchCompanyProfile, fetchSecFilings } from "./api";
+import { fetchCompanyProfile, fetchKeyMetrics, fetchSecFilings } from "./api";
 import App from "./App";
 import { CompanyProfile } from "./components";
 import "./index.css";
@@ -33,6 +33,7 @@ const router = createBrowserRouter([
               return [
                 await fetchCompanyProfile(params.ticker as string),
                 await fetchSecFilings(params.ticker as string),
+                await fetchKeyMetrics(params.ticker as string),
               ];
             },
           },
