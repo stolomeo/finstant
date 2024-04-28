@@ -1,4 +1,5 @@
 using api.Dtos;
+using api.Extensions;
 using api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +20,8 @@ namespace api.Controllers
         public async Task<IActionResult> GetAll()
         {
             var stocks = await _stockService.GetAllStocksAsync();
-            return Ok(stocks);
+            return Ok(stocks.Select(stock => stock.ToDto()).ToList());
+
         }
 
         [HttpGet("{id}")]
@@ -29,7 +31,7 @@ namespace api.Controllers
             if (stock == null)
                 return NotFound();
 
-            return Ok(stock);
+            return Ok(stock.ToDto());
         }
 
         [HttpPost]
@@ -39,7 +41,7 @@ namespace api.Controllers
             if (createdStock == null)
                 return BadRequest("Unable to create stock, please check the details and try again.");
 
-            return CreatedAtAction(nameof(GetById), new { id = createdStock.Id }, createdStock);
+            return CreatedAtAction(nameof(GetById), new { id = createdStock.Id }, createdStock.ToDto());
         }
 
         [HttpPut("{id}")]

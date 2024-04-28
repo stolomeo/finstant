@@ -2,6 +2,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace api.Dtos
 {
+    public record StockResponse
+    {
+        public int Id { get; init; }
+        public string Symbol { get; init; }
+        public string CompanyName { get; init; }
+    }
+
     public record CreateStockRequest
     {
         [Required]
