@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import { loginUser, registerUser } from "../api";
 import { useAuth } from "../context";
 import { User, UserAuthResponse } from "../types";
@@ -120,15 +121,27 @@ export const AuthForm = ({ isNewUser }: Props) => {
               </button>
 
               <p className="text-sm font-light text-center text-gray-500 dark:text-gray-400">
-                {isNewUser
-                  ? "Already have an account? "
-                  : "Don't have an account yet? "}
-                <a
-                  href="#"
-                  className="font-medium text-gray-300 hover:underline"
-                >
-                  Sign {isNewUser ? "in" : "up"}
-                </a>
+                {isNewUser ? (
+                  <>
+                    Already have an account?{" "}
+                    <Link
+                      to="/login"
+                      className="font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-500 hover:underline"
+                    >
+                      Log in
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    Need to create an account?{" "}
+                    <Link
+                      to="/register"
+                      className="font-medium text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-500 hover:underline"
+                    >
+                      Sign up
+                    </Link>
+                  </>
+                )}
               </p>
             </form>
           </div>
