@@ -1,8 +1,22 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace api.Dtos
 {
     public record AuthResponse(string Message, string Email, string Username, string Token);
 
-    public record LoginRequest(string Username, string Password);
+    public record LoginRequest
+    {
+        [Required]
+        public string Username { get; init; }
 
-    public record RegisterRequest(string Username, string Email, string Password);
+        [Required]
+        public string Password { get; init; }
+    }
+
+    public record RegisterRequest : LoginRequest
+    {
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+    }
 }

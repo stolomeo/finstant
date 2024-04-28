@@ -49,9 +49,9 @@ namespace api.Controllers
                 Email = registerRequest.Email
             };
 
-            var passwordSignInResult = await _userManager.CreateAsync(appUser, registerRequest.Password);
-            if (!passwordSignInResult.Succeeded)
-                return BadRequest(passwordSignInResult.Errors);
+            var createUserResult = await _userManager.CreateAsync(appUser, registerRequest.Password);
+            if (!createUserResult.Succeeded)
+                return BadRequest(createUserResult.Errors);
 
             var roleResult = await _userManager.AddToRoleAsync(appUser, "User");
             if (!roleResult.Succeeded)
